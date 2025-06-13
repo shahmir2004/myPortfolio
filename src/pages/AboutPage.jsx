@@ -34,13 +34,9 @@ function AboutPage() {
               with a strong enthusiasm for building elegant and effective web solutions. I thrive on transforming complex problems
               into intuitive and enjoyable user experiences.
             </p> {/* UPDATED */}
+            
             <p>
-              My journey into the world of technology began with [Your personal story - e.g., a fascination for how websites work / a small coding project that sparked your interest].
-              This curiosity has grown into a dedicated pursuit of knowledge in software development,
-              particularly in full-stack web technologies. I am constantly exploring new tools and techniques to enhance my skillset.
-            </p>
-            <p>
-              Beyond coding, I enjoy [mention a hobby or two, e.g., hiking, photography, playing a musical instrument], which helps me approach problems with a fresh perspective.
+              Beyond coding, I enjoy hitting the gym and staying healthy, this is one area in which i have selective experiences and have researched well.
               I'm eager to contribute to innovative projects and collaborate with talented teams.
             </p>
           </motion.div>

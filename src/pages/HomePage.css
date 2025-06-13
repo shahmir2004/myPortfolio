@@ -1,186 +1,227 @@
-/* src/pages/HomePage.css (Revamped) */
+/* src/pages/HomePage.css */
 
 .homepage-wrapper {
-  /* This is the main page container, 3D blob is fixed behind it */
   position: relative;
-  z-index: 1; /* Ensure content is above the -1 z-index blob canvas */
+  z-index: 1; /* Ensures content is above any fixed background elements like particles */
 }
 
-/* --- Hero Section (Revamped) --- */
-.hero-section-revamped {
-  min-height: 95vh; /* Slightly less than full VH to hint at scrollability */
-  display: flex; /* Using flex to center content */
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative; /* For text absolute positioning if needed, but flex handles centering */
-  padding: 100px 20px 40px 20px; /* Top padding for navbar, general padding */
-  text-align: center; /* Center all text content within */
-  overflow: hidden; /* Just in case */
+/* --- Hero Section --- */
+.hero-section {
+  min-height: 90vh; /* Slightly less than full, can be 95vh or 100vh */
+  display: flex;
+  align-items: center; /* Vertically center the content block */
+  justify-content: flex-start; /* Align content block to the left on larger screens */
+  position: relative; /* For ParticleBackground's absolute positioning */
+  padding: 130px 0 60px 0; /* Top for navbar, bottom spacing. Horizontal via .container */
+  overflow: hidden;
 }
 
-.hero-content-revamped { /* This is the .container from index.css essentially */
-  max-width: 800px; /* Control max width of text block */
-  width: 100%;
-  color: var(--text-primary); /* Ensures text color is from theme */
+.hero-content-container { /* This is the .container within hero-section */
+  position: relative; /* For z-index if ever needed against particles */
+  z-index: 1; /* Explicitly above particles (which are z-index: 0 within hero-section) */
+  text-align: left; /* Default to left-aligned text */
+  max-width: 60%; /* Content takes left 60% on desktop */
+  /* .container from index.css provides max-width for the whole page,
+     this max-width is relative to that if .hero-section is full width.
+     If .hero-section uses .container, then this max-width is relative to the inner .container */
+  margin-left: 0; /* Aligns to the left of the .container's padding */
 }
 
-.hero-title-revamped {
-  font-size: clamp(2.8rem, 7vw, 5.2rem);
+.hero-title { /* Shahmir Ahmed - H1 */
+  font-size: clamp(3rem, 7.5vw, 5.8rem); /* Primary focus - LARGE */
   color: var(--text-headings);
   font-weight: 800;
   line-height: 1.1;
-  letter-spacing: -1.5px;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.6rem;
+  letter-spacing: -2px;
 }
 
-.hero-tagline-revamped {
-  font-size: clamp(1.1rem, 2.8vw, 1.6rem);
+.hero-subtitle { /* Creative Web Developer... - H2 */
+  font-size: clamp(1.25rem, 3.2vw, 1.9rem); /* Scaled relative to title */
+  color: var(--text-accent);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  line-height: 1.35;
+}
+
+.hero-description { /* Transforming ideas... - P */
+  font-size: clamp(1rem, 2vw, 1.2rem); /* Scaled relative to subtitle */
   color: var(--text-secondary);
   margin-bottom: 2.8rem;
-  max-width: 680px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.65;
+  max-width: 580px; /* Constrain line length for readability */
+  line-height: 1.75;
 }
 
-.hero-cta-revamped { /* Specific to hero button if different from global .btn.btn-primary */
-  padding: 0.9rem 2.6rem;
+.hero-cta { /* Explore My Work button */
+  padding: 0.9rem 2.5rem;
   font-size: 1.1rem;
+  border-radius: 7px;
   font-weight: 600;
-  border-radius: 8px;
-  /* Uses .btn and .btn-primary styles from index.css for colors and base */
+  /* .btn & .btn-primary styles from index.css for colors and base */
 }
 
-
-/* --- General Section Titles & Subtitles (Revamped) --- */
-.section-title-revamped {
-  font-size: clamp(2rem, 5vw, 2.8rem);
+/* --- General Section Titles & Subtitles for subsequent sections --- */
+/* Applied to H2 and P elements in Intro, Teaser, CTA */
+.section-title {
+  font-size: clamp(1.8rem, 4.2vw, 2.5rem); /* Coherent sizing */
   color: var(--text-headings);
   margin-bottom: 1rem;
   font-weight: 700;
 }
 
-.section-subtitle-revamped {
-  font-size: clamp(1rem, 2.2vw, 1.2rem);
+.section-subtitle {
+  font-size: clamp(0.95rem, 2vw, 1.15rem); /* Coherent sizing */
   color: var(--text-secondary);
-  max-width: 700px;
-  margin: 0 auto 2rem auto;
+  max-width: 680px; /* Consistent max width */
+  margin: 0 auto 2.25rem auto; /* Centered with bottom margin */
   line-height: 1.7;
 }
 
-
-/* --- Intro Section (Revamped) --- */
-.intro-section-revamped { /* Uses .content-section-overlay from index.css */
-  /* Any additional specific styles for this section can go here */
+/* --- Intro Section --- */
+.intro-section { /* Uses .content-section-overlay from index.css */
+  /* Specific tweaks for intro if .content-section-overlay isn't enough */
 }
-.intro-cta-revamped { /* Specific to intro button */
-  margin-top: 1.5rem;
-  /* Uses .btn .btn-outline from index.css */
+.intro-cta { /* Button in intro section */
+  margin-top: 1.25rem;
+  /* .btn & .btn-outline styles from index.css apply */
 }
 
-
-/* --- Featured Teaser Section (Revamped) --- */
-.featured-teaser-revamped { /* This section does NOT use .content-section-overlay */
-  background-color: var(--bg-secondary); /* A distinct background */
-  padding: 4rem 20px; /* Uses .page-section equivalent padding */
-  text-align: center;
+/* --- Featured Teaser Section --- */
+.featured-teaser-section {
+  /* This class can be added to index.css as .page-section-themed if used elsewhere */
+  /* background-color: var(--bg-secondary); */ /* Example if defined in index.css */
+  /* padding: 4.5rem 20px; */ /* Example if defined in index.css */
+  /* For now, assuming these are set in HomePage.jsx inline or here */
+  background-color: var(--bg-secondary);
+  padding: 4.5rem 0; /* Vertical padding, horizontal by .container */
+  text-align: center; /* Handled by .text-center on container in JSX */
   transition: var(--color-transition);
 }
-.featured-teaser-revamped .section-title-revamped,
-.featured-teaser-revamped .section-subtitle-revamped {
-  /* Colors should be inherited correctly from global styles based on --bg-secondary */
-}
+/* .section-title and .section-subtitle within this section will inherit general styles */
 
-.teaser-links-revamped {
+.teaser-links {
   display: flex;
   justify-content: center;
-  align-items: center; /* Align items if they have different heights */
-  gap: 1rem; /* Reduced gap */
-  margin-top: 2rem;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 2.25rem;
   margin-bottom: 2.5rem;
   flex-wrap: wrap;
 }
-.teaser-project-link-revamped {
-  font-size: 1.1rem; /* Slightly smaller */
-  font-weight: 500;
+.teaser-project-link {
+  font-size: 1.1rem;
+  font-weight: 600;
   color: var(--text-accent);
-  padding: 0.5rem 1rem;
+  padding: 0.55rem 1.1rem;
   border-radius: 6px;
   background-color: rgba(var(--brand-accent-rgb), 0.1);
-  border: 1px solid rgba(var(--brand-accent-rgb), 0.2);
+  border: 1px solid rgba(var(--brand-accent-rgb), 0.25);
   transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
 }
-.teaser-project-link-revamped:hover {
+.teaser-project-link:hover {
   background-color: var(--brand-accent);
   color: var(--text-primary);
   text-decoration: none;
-  transform: translateY(-2px);
-  box-shadow: 0 3px 10px rgba(var(--brand-accent-rgb), 0.2);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 4px 10px rgba(var(--brand-accent-rgb), 0.2);
 }
 
-
-/* --- Final CTA Section (Revamped) --- */
-.final-cta-revamped { /* Uses .content-section-overlay from index.css */
-  /* Additional specific styles if needed */
+/* --- Final CTA Section --- */
+.final-cta-section { /* Uses .content-section-overlay from index.css */
+  /* Specific tweaks if needed */
 }
-.final-cta-btn-revamped {
-  padding: 0.9rem 2.6rem; /* Consistent with hero CTA */
-  font-size: 1.1rem; /* Consistent */
-  /* Uses .btn .btn-primary */
-}
-
-
-/* --- Responsive Adjustments for Revamped HomePage --- */
-@media (max-width: 991px) {
-  .hero-content-revamped {
-    max-width: 90%;
-  }
-  .section-title-revamped {
-    font-size: clamp(1.8rem, 5.5vw, 2.4rem);
-  }
-  .section-subtitle-revamped {
-    font-size: clamp(0.95rem, 2.8vw, 1.15rem);
-  }
+.final-cta-btn {
+  padding: 0.9rem 2.5rem; /* Consistent with hero CTA */
+  font-size: 1.1rem;
+  /* .btn & .btn-primary styles from index.css apply */
 }
 
-@media (max-width: 767px) {
-  .hero-section-revamped {
-    padding: 80px 15px 30px 15px;
-    min-height: 85vh; /* Slightly less on mobile */
+/* --- Responsive Adjustments --- */
+@media (max-width: 991px) { /* Tablet */
+  .hero-section {
+    justify-content: center; /* Center the content block on tablet */
   }
-  .hero-content-revamped {
-    max-width: 100%; /* Full width within parent's padding */
+  .hero-content-container {
+    max-width: 80%; /* Content takes more space */
+    text-align: center; /* Center text */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px; /* Symmetrical padding */
+    padding-right: 20px;
   }
-  .hero-title-revamped {
-    font-size: clamp(2rem, 9vw, 3rem);
+  .hero-description { /* Ensure this also centers if parent is centered */
+      margin-left: auto;
+      margin-right: auto;
   }
-  .hero-tagline-revamped {
-    font-size: clamp(1rem, 4vw, 1.2rem);
-    margin-bottom: 2rem;
+
+  .section-title {
+    font-size: clamp(1.8rem, 4.5vw, 2.2rem);
   }
-  .hero-cta-revamped, .final-cta-btn-revamped {
+  .section-subtitle {
+    font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+  }
+}
+
+@media (max-width: 767px) { /* Mobile */
+  .hero-section {
+    padding: 90px 15px 40px 15px;
+    min-height: 80vh;
+  }
+  .hero-content-container {
+    max-width: 100%; /* Full width within section's padding */
+    padding-left: 0; /* Rely on .hero-section's padding */
+    padding-right: 0;
+  }
+  .hero-title {
+    font-size: clamp(2.4rem, 9vw, 3.2rem); /* Adjusted mobile title size */
+  }
+  .hero-subtitle {
+    font-size: clamp(1.1rem, 4.5vw, 1.5rem);
+  }
+  .hero-description {
+    font-size: clamp(0.9rem, 3.8vw, 1.1rem);
+  }
+  .hero-cta, .final-cta-btn {
     padding: 0.8rem 2rem;
     font-size: 1rem;
   }
 
-  .content-section-overlay, /* From index.css */
-  .featured-teaser-revamped { /* Ensure themed section also gets mobile padding */
-      padding-left: 1.25rem;
-      padding-right: 1.25rem;
-  }
-  .featured-teaser-revamped {
+  /* Ensure .content-section-overlay (from index.css) and .page-section-themed have appropriate mobile padding */
+  /* If .container class doesn't provide enough, or if sections are full-bleed then add here: */
+  .content-section-overlay,
+  .featured-teaser-section {
+      /* Using container within these sections handles their content padding */
+      /* If sections themselves need different padding on mobile: */
       padding-top: 3rem;
       padding-bottom: 3rem;
   }
-  .teaser-links-revamped {
-      flex-direction: column; /* Stack teaser links on mobile */
-      align-items: center;
-      gap: 0.8rem;
+   .featured-teaser-section .container,
+   .intro-section .container,
+   .final-cta-section .container {
+        padding-left: 15px; /* Ensure container padding is good on mobile */
+        padding-right: 15px;
+   }
+
+
+  .teaser-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
   }
-  .teaser-project-link-revamped {
-      width: auto;
-      min-width: 180px; /* Ensure good tap target */
-      font-size: 1rem;
+  .teaser-project-link {
+    width: auto;
+    min-width: 190px;
+    font-size: 1rem;
   }
+}
+
+/* Utility class if not in index.css */
+.text-center {
+  text-align: center;
+}
+.text-shadow-soft { /* Copied from index.css for reference if needed, but should be global */
+  text-shadow: 0px 1px 3px rgba(var(--shadow-color-rgb), var(--shadow-opacity-light));
+}
+.text-shadow-strong {
+   text-shadow: 1px 1px 4px rgba(var(--shadow-color-rgb), var(--shadow-opacity-medium));
 }

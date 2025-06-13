@@ -1,123 +1,133 @@
 /* src/pages/ContactPage.css */
-.contact-page {
-  /* Uses .page-section for main padding from index.css */
-  /* Or use .content-section-overlay if it's over the 3D background */
-  transition: var(--color-transition);
+
+/* .contact-page uses .content-section-overlay from index.css for its main styling */
+
+.contact-page .section-title { /* Targets h2 */
+  /* Uses global .section-title styles from index.css if available, or specific ones here */
+  /* margin-bottom: 0.5rem; /* Example, already in index.css probably */
+}
+.contact-page .section-subtitle { /* Targets p */
+  /* Uses global .section-subtitle styles from index.css if available */
+  /* margin-bottom: 3rem; */
 }
 
-.contact-page .page-title {
-  color: var(--text-headings);
-  margin-bottom: 0.5rem;
-  font-size: clamp(2rem, 5vw, 2.8rem);
-  text-align: center;
-}
-.contact-page .page-subtitle {
-  color: var(--text-secondary);
-  margin-bottom: 3rem;
-  font-size: 1.1rem;
-  text-align: center;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  transition: var(--color-transition);
-}
-
-.contact-content {
+.contact-content-grid { /* Replaces .contact-content if you used that before */
   display: grid;
-  grid-template-columns: 1fr; /* Default to single column */
-  gap: 3rem; /* Space between info and form */
-  align-items: flex-start; /* Align items to the top of their grid area */
+  grid-template-columns: 1fr; /* Single column by default */
+  gap: 2.5rem; /* Reduced gap slightly */
+  align-items: flex-start;
+  margin-top: 2rem; /* Space after subtitle */
 }
 
-.contact-info {
-  background-color: var(--bg-secondary);
-  padding: 2rem;
+.contact-info-block { /* Replaces .contact-info */
+  background-color: var(--bg-secondary); /* Or transparent if .content-section-overlay is enough */
+  padding: 1.5rem 2rem; /* Slightly adjusted padding */
   border-radius: 8px;
   border: 1px solid var(--border-primary);
-  box-shadow: 0 4px 15px rgba(var(--shadow-color-rgb), var(--shadow-opacity-light));
+  box-shadow: 0 2px 8px rgba(var(--shadow-color-rgb), var(--shadow-opacity-light));
   transition: var(--color-transition), box-shadow var(--transition-speed) ease;
 }
-
-.contact-info h3 {
-  color: var(--text-headings);
-  margin-bottom: 1.5rem;
-  font-size: 1.5rem;
+.contact-info-block:hover {
+  box-shadow: 0 4px 15px rgba(var(--shadow-color-rgb), var(--shadow-opacity-medium));
 }
-.contact-info p {
-  margin-bottom: 1rem;
+
+.contact-info-block h3 {
+  color: var(--text-headings);
+  margin-bottom: 1.25rem;
+  font-size: 1.4rem; /* Slightly smaller h3 for this block */
+}
+.contact-info-block p {
+  margin-bottom: 0.85rem;
   color: var(--text-primary);
   line-height: 1.6;
-  transition: var(--color-transition);
 }
-.contact-info p strong {
+.contact-info-block p strong {
   color: var(--text-headings);
   font-weight: 600;
 }
-.contact-info a { /* Uses .standard-link styles from index.css if applied or global 'a' styles */
-  /* color: var(--text-accent); */ /* Ensured by global 'a' style */
+/* .standard-link class from index.css handles 'a' tag styling */
+
+
+.contact-form-block { /* Replaces .contact-form */
+  /* No specific background if .content-section-overlay provides it */
 }
 
-.contact-form {
-  /* No specific background needed if page has one, or add one if desired */
-  /* padding: 2rem; */
-  /* border-radius: 8px; */
-}
-
-.contact-form h3 {
+.contact-form-block h3 {
   color: var(--text-headings);
-  margin-bottom: 1.5rem;
-  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
+  font-size: 1.4rem;
 }
 
-.form-group {
-  margin-bottom: 1.5rem;
-}
+.form-group { margin-bottom: 1.25rem; } /* Slightly reduced margin */
 
 .form-group label {
   display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
+  margin-bottom: 0.4rem; /* Tighter label spacing */
+  font-weight: 500;
   color: var(--text-secondary);
-  transition: var(--color-transition);
 }
 
 .form-group input,
 .form-group textarea {
   width: 100%;
-  padding: 0.85rem 1rem;
+  padding: 0.8rem 1rem; /* Slightly reduced padding */
   border: 1px solid var(--border-secondary);
   border-radius: 5px;
   font-family: var(--font-primary);
-  font-size: 1rem;
-  background-color: var(--bg-primary); /* Input background */
-  color: var(--text-primary); /* Input text color */
-  transition: var(--color-transition), border-color var(--transition-speed) ease;
+  font-size: 0.95rem; /* Slightly smaller input font */
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: var(--color-transition), border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
 }
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
   border-color: var(--brand-primary);
-  box-shadow: 0 0 0 3px rgba(var(--brand-primary-rgb), 0.2);
+  box-shadow: 0 0 0 3px rgba(var(--brand-primary-rgb), 0.25);
 }
 
-.form-group textarea {
-  resize: vertical;
-  min-height: 120px;
+.form-group textarea { resize: vertical; min-height: 130px; }
+
+.form-status { /* For success/error messages */
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  font-weight: 500;
+  text-align: center;
+  font-size: 0.9rem;
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+}
+.form-status.success {
+  background-color: rgba(var(--brand-accent-rgb), 0.15);
+  color: var(--brand-accent);
+  border: 1px solid rgba(var(--brand-accent-rgb), 0.3);
+}
+.form-status.error {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: #dc3545; /* Standard error red */
+  border: 1px solid rgba(220, 53, 69, 0.4);
+}
+.form-status.info { /* For "Sending..." message */
+    background-color: rgba(var(--brand-primary-rgb), 0.1);
+    color: var(--brand-primary);
+    border: 1px solid rgba(var(--brand-primary-rgb), 0.2);
 }
 
-.contact-form .btn-primary { /* Submit button */
-  width: 100%; /* Full width button */
+
+.contact-form-block .btn-primary { /* Submit button */
+  width: 100%;
   padding: 0.9rem 1.5rem;
-  font-size: 1.1rem;
+  font-size: 1.05rem; /* Slightly adjusted */
 }
 
 /* Responsive layout for Contact page */
-@media (min-width: 992px) {
-  .contact-content {
-    grid-template-columns: 1fr 1.5fr; /* Info on left, form on right */
-    gap: 4rem;
+@media (min-width: 800px) { /* Adjusted breakpoint */
+  .contact-content-grid {
+    grid-template-columns: 1fr 1.7fr; /* Info slightly smaller, form slightly larger */
+    gap: 3rem; /* Increased gap */
   }
-  .contact-form .btn-primary {
-      width: auto; /* Auto width on larger screens */
+  .contact-form-block .btn-primary {
+      width: auto; /* Auto width for button on larger screens */
+      min-width: 180px; /* Ensure decent button size */
   }
 }
