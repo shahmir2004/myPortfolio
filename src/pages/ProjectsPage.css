@@ -1,7 +1,49 @@
 /* src/pages/ProjectsPage.css */
+.projects-page {
+  /* Uses .page-section for main padding from index.css */
+  /* Or use .content-section-overlay if it's over the 3D background */
+  transition: var(--color-transition);
+}
+
+.projects-page .page-title {
+  color: var(--text-headings);
+  margin-bottom: 0.75rem; /* Consistent with h_ tags */
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  text-align: center;
+}
+
+.projects-page .page-subtitle {
+  color: var(--text-secondary);
+  margin-bottom: 3rem;
+  font-size: 1.1rem;
+  text-align: center;
+  max-width: 650px; /* Constrain width */
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+  transition: var(--color-transition);
+}
+
 .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
-    gap: 20px;
-    margin-top: 20px;
-  }
+  display: grid;
+  /* grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); */ /* Original */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); /* Ensure minmax doesn't exceed 100% */
+  gap: 2.5rem; /* Increased gap */
+  margin-top: 20px; /* If title/subtitle are not part of a header element */
+}
+
+.project-grid-item {
+  /* The .project-card will fill this.
+     No specific styles needed here unless you want to add outer animations
+     or specific grid item behaviors.
+     The Framer Motion div for items is inside ProjectsPage.jsx */
+}
+
+/* Fallback message if no projects */
+.no-projects-message {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    padding: 3rem 0;
+    transition: var(--color-transition);
+}

@@ -1,0 +1,123 @@
+/* src/pages/ContactPage.css */
+.contact-page {
+  /* Uses .page-section for main padding from index.css */
+  /* Or use .content-section-overlay if it's over the 3D background */
+  transition: var(--color-transition);
+}
+
+.contact-page .page-title {
+  color: var(--text-headings);
+  margin-bottom: 0.5rem;
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  text-align: center;
+}
+.contact-page .page-subtitle {
+  color: var(--text-secondary);
+  margin-bottom: 3rem;
+  font-size: 1.1rem;
+  text-align: center;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: var(--color-transition);
+}
+
+.contact-content {
+  display: grid;
+  grid-template-columns: 1fr; /* Default to single column */
+  gap: 3rem; /* Space between info and form */
+  align-items: flex-start; /* Align items to the top of their grid area */
+}
+
+.contact-info {
+  background-color: var(--bg-secondary);
+  padding: 2rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-primary);
+  box-shadow: 0 4px 15px rgba(var(--shadow-color-rgb), var(--shadow-opacity-light));
+  transition: var(--color-transition), box-shadow var(--transition-speed) ease;
+}
+
+.contact-info h3 {
+  color: var(--text-headings);
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+.contact-info p {
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  line-height: 1.6;
+  transition: var(--color-transition);
+}
+.contact-info p strong {
+  color: var(--text-headings);
+  font-weight: 600;
+}
+.contact-info a { /* Uses .standard-link styles from index.css if applied or global 'a' styles */
+  /* color: var(--text-accent); */ /* Ensured by global 'a' style */
+}
+
+.contact-form {
+  /* No specific background needed if page has one, or add one if desired */
+  /* padding: 2rem; */
+  /* border-radius: 8px; */
+}
+
+.contact-form h3 {
+  color: var(--text-headings);
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: var(--color-transition);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border-secondary);
+  border-radius: 5px;
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  background-color: var(--bg-primary); /* Input background */
+  color: var(--text-primary); /* Input text color */
+  transition: var(--color-transition), border-color var(--transition-speed) ease;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 3px rgba(var(--brand-primary-rgb), 0.2);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.contact-form .btn-primary { /* Submit button */
+  width: 100%; /* Full width button */
+  padding: 0.9rem 1.5rem;
+  font-size: 1.1rem;
+}
+
+/* Responsive layout for Contact page */
+@media (min-width: 992px) {
+  .contact-content {
+    grid-template-columns: 1fr 1.5fr; /* Info on left, form on right */
+    gap: 4rem;
+  }
+  .contact-form .btn-primary {
+      width: auto; /* Auto width on larger screens */
+  }
+}

@@ -1,55 +1,66 @@
-// src/pages/AboutPage.jsx
 import React from 'react';
-import './AboutPage.css'; // Create this file
+import { motion } from 'framer-motion';
+import './AboutPage.css';
+
+const sectionVariants = {
+  hidden: { opacity: 0, x: -50 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut", staggerChildren: 0.2 } }
+};
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 }
+};
 
 function AboutPage() {
+  const skills = {
+    languages: ["JavaScript (ES6+)", "Python", "HTML5", "CSS3", "SQL"],
+    frameworks: ["React", "Node.js (Express)", "Flask", "Framer Motion"],
+    tools: ["Git & GitHub", "VS Code", "Figma (Basic)", "Docker (Basic)"],
+  };
+
   return (
-    <div className="about-section">
-      <h2>About Me</h2>
-      <p>
-        Hello! I'm [Your Name], a driven and enthusiastic final-year Computer Science student
-        with a strong foundation in software development, particularly in web technologies.
-        I'm fascinated by the power of code to solve real-world problems and create meaningful user experiences.
-      </p>
-      <p>
-        My journey into tech started with [mention something specific, e.g., a curiosity for how websites work, a small coding project].
-        Since then, I've dived deep into learning languages like JavaScript and Python, and frameworks like React.
-        I'm always eager to learn new technologies and methodologies.
-      </p>
-      <h3>Skills</h3>
-      <div className="skills-grid">
-        {/* You can make this more dynamic or just list them */}
-        <div className="skill-category">
-          <h4>Languages</h4>
-          <ul>
-            <li>JavaScript (ES6+)</li>
-            <li>Python</li>
-            <li>HTML5</li>
-            <li>CSS3</li>
-            {/* Add more */}
-          </ul>
-        </div>
-        <div className="skill-category">
-          <h4>Frameworks/Libraries</h4>
-          <ul>
-            <li>React</li>
-            <li>Node.js (Express.js) - if applicable</li>
-            <li>Flask/Django - if applicable</li>
-            {/* Add more */}
-          </ul>
-        </div>
-        <div className="skill-category">
-          <h4>Tools & Platforms</h4>
-          <ul>
-            <li>Git & GitHub</li>
-            <li>VS Code</li>
-            <li>Vercel/Netlify</li>
-            {/* Add more */}
-          </ul>
+    <motion.div
+      className="about-page page-section"
+      variants={sectionVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <div className="container">
+        <motion.h2 variants={itemVariants} className="text-center page-title">About Me</motion.h2>
+        <div className="about-content">
+          <motion.div variants={itemVariants} className="about-text">
+            <p>
+              Hello! I'm Shahmir Ahmed, a passionate and detail-oriented final-year Computer Science student
+              with a strong enthusiasm for building elegant and effective web solutions. I thrive on transforming complex problems
+              into intuitive and enjoyable user experiences.
+            </p> {/* UPDATED */}
+            <p>
+              My journey into the world of technology began with [Your personal story - e.g., a fascination for how websites work / a small coding project that sparked your interest].
+              This curiosity has grown into a dedicated pursuit of knowledge in software development,
+              particularly in full-stack web technologies. I am constantly exploring new tools and techniques to enhance my skillset.
+            </p>
+            <p>
+              Beyond coding, I enjoy [mention a hobby or two, e.g., hiking, photography, playing a musical instrument], which helps me approach problems with a fresh perspective.
+              I'm eager to contribute to innovative projects and collaborate with talented teams.
+            </p>
+          </motion.div>
+
+          <motion.div variants={itemVariants} className="skills-section">
+            <h3>My Skills</h3>
+            {Object.entries(skills).map(([category, skillList]) => (
+              <div key={category} className="skill-category">
+                <h4>{category.charAt(0).toUpperCase() + category.slice(1)}</h4>
+                <ul className="skills-list">
+                  {skillList.map(skill => (
+                    <motion.li key={skill} variants={itemVariants}>{skill}</motion.li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </motion.div>
         </div>
       </div>
-      {/* Add sections for Education, Experience (if any), Hobbies (optional) */}
-    </div>
+    </motion.div>
   );
 }
 export default AboutPage;

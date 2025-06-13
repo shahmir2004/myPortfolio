@@ -1,10 +1,51 @@
 /* src/components/Footer.css */
 .footer {
-    background-color: #222;
-    color: white;
-    text-align: center;
-    padding: 1rem;
-    /* position: fixed; /* Uncomment if you want a sticky footer */
-    /* bottom: 0; */
-    /* width: 100%; */
-  }
+  background-color: var(--bg-secondary); /* Use secondary background, or primary for more contrast */
+  color: var(--text-secondary); /* Use secondary text color, or primary for more contrast */
+  text-align: center;
+  padding: 2.5rem 1rem; /* Increased padding */
+  margin-top: auto; /* Pushes footer to bottom if content is short */
+  border-top: 1px solid var(--border-primary);
+  transition: var(--color-transition);
+}
+
+.footer .container {
+    /* Container class from index.css handles max-width */
+}
+
+.footer p {
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.footer .social-links {
+    margin-top: 0.5rem; /* Add some space if p is above */
+}
+
+.footer .social-links a {
+  color: var(--text-accent); /* Links use accent color */
+  margin: 0 0.75rem; /* Increased spacing */
+  text-decoration: none;
+  font-size: 1rem; /* Slightly larger social links */
+  font-weight: 500;
+  transition: color var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+
+.footer .social-links a:hover {
+  color: var(--brand-primary); /* Or a hover variant of accent */
+  transform: translateY(-2px);
+  text-decoration: none; /* Keep no underline for icon-like links */
+}
+
+/* Example: if you use SVG icons as links */
+/*
+.footer .social-links a svg {
+    width: 24px;
+    height: 24px;
+    fill: var(--text-accent);
+    transition: fill var(--transition-speed) ease;
+}
+.footer .social-links a:hover svg {
+    fill: var(--brand-primary);
+}
+*/

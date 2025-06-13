@@ -1,4 +1,3 @@
-// src/components/Footer.jsx
 import React from 'react';
 import './Footer.css';
 
@@ -6,8 +5,13 @@ function Footer() {
   const currentYear = new Date().getFullYear();
   return (
     <footer className="footer">
-      <p>© {currentYear} Your Name. All rights reserved.</p>
-      {/* Optional: Add social media links here */}
+      <div className="container">
+        <p>© {currentYear} Shahmir Ahmed. All rights reserved.</p> {/* UPDATED */}
+        <div className="social-links">
+          <a href="https://github.com/shahmir2004" target="_blank" rel="noopener noreferrer">GitHub</a> {/* UPDATED */}
+          <a href="https://www.linkedin.com/in/shahmir-ahmed-a89790294/" target="_blank" rel="noopener noreferrer">LinkedIn</a> {/* UPDATED */}
+        </div>
+      </div>
     </footer>
   );
 }

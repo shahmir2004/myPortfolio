@@ -52,3 +52,30 @@ body {
   max-width: 1200px;
   margin: 0 auto; /* Center the content */
 }
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2c3e50;
+  --accent-color: #e74c3c;
+  --text-color: #333;
+  --background-color: #f4f4f4;
+  /* ... other colors ... */
+}
+
+body {
+  font-family: 'YourBodyFont', sans-serif;
+  color: var(--text-color);
+  background-color: var(--background-color);
+}
+
+h1, h2, h3 {
+  font-family: 'YourHeadingFont', serif;
+  color: var(--secondary-color);
+}
+.glass-card {
+  background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

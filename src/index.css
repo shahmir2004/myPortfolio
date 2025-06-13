@@ -1,68 +1,208 @@
+/* src/index.css */
+
+/* Define Your Fonts (Keep these as they are or update to your preference) */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  --font-primary: 'Open Sans', sans-serif;
+  --font-secondary: 'Montserrat', sans-serif; /* For headings */
+  --transition-speed: 0.3s;
+  --color-transition: color var(--transition-speed) ease,
+                      background-color var(--transition-speed) ease,
+                      border-color var(--transition-speed) ease,
+                      fill var(--transition-speed) ease, /* For SVGs if any */
+                      stroke var(--transition-speed) ease; /* For SVGs if any */
+}
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* REFINED SEMANTIC COLOR DEFINITIONS */
+:root {
+  /* Brand Colors (These might stay consistent or have slight dark mode variations) */
+  --brand-primary: #007bff; /* Your main brand blue */
+  --brand-primary-rgb: 0, 123, 255;
+  --brand-accent: #ffc107;  /* Your main brand yellow/gold */
+  --brand-accent-rgb: 255, 193, 7;
+
+  /* Light Theme Semantic Colors */
+  --bg-primary: #ffffff;            /* Main page background */
+  --bg-primary-rgb: 255, 255, 255;
+  --bg-secondary: #f8f9fa;          /* Slightly off-white for cards, sections */
+  --bg-secondary-rgb: 248, 249, 250;
+  --bg-overlay: rgba(255, 255, 255, 0.85); /* For content sections over dynamic backgrounds */
+  --bg-overlay-rgb: 255, 255, 255;
+
+  --text-primary: #212529;          /* Main body text */
+  --text-primary-rgb: 33, 37, 41;
+  --text-secondary: #495057;        /* Subtler text, descriptions */
+  --text-secondary-rgb: 73, 80, 87;
+  --text-headings: #343a40;         /* Main headings */
+  --text-headings-rgb: 52, 58, 64;
+  --text-accent: var(--brand-primary); /* For links or highlighted text, using brand color */
+  --text-on-brand-bg: #ffffff;      /* Text on brand-primary buttons */
+
+  --border-primary: #dee2e6;        /* Primary border color */
+  --border-secondary: #ced4da;      /* Slightly darker border */
+
+  --shadow-color-rgb: 0, 0, 0;      /* Black for shadows in light mode */
+  --shadow-opacity-light: 0.08;
+  --shadow-opacity-medium: 0.12;
+}
+
+body.dark-mode {
+  /* Brand Colors for Dark Mode (Optional: Adjust if needed) */
+  --brand-primary: #0d6efd; /* Slightly brighter blue for dark mode */
+  --brand-primary-rgb: 13, 110, 253;
+  --brand-accent: #ffca2c;   /* Slightly brighter accent */
+  --brand-accent-rgb: 255, 202, 44;
+
+  /* Dark Theme Semantic Colors */
+  --bg-primary: #121212;
+  --bg-primary-rgb: 18, 18, 18;
+  --bg-secondary: #1e1e1e;
+  --bg-secondary-rgb: 30, 30, 30;
+  --bg-overlay: rgba(30, 30, 30, 0.88);
+  --bg-overlay-rgb: 30,30,30;
+
+  --text-primary: #e9ecef;
+  --text-primary-rgb: 233, 236, 239;
+  --text-secondary: #adb5bd;
+  --text-secondary-rgb: 173, 181, 189;
+  --text-headings: #f8f9fa;
+  --text-headings-rgb: 248, 249, 250;
+  --text-accent: var(--brand-primary); /* Or a lighter version of brand-primary if needed */
+  --text-on-brand-bg: #ffffff; /* Usually stays white or very light */
+
+  --border-primary: #373b3e;
+  --border-secondary: #495057;
+
+  --shadow-color-rgb: 100, 100, 100; /* Lighter shadows for dark mode, or use black with low opacity */
+  --shadow-opacity-light: 0.15; /* Might need higher opacity for subtle shadows on dark */
+  --shadow-opacity-medium: 0.2;
+}
+
+
+/* Basic Reset & Body Styles */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-primary);
+  line-height: 1.6;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  transition: var(--color-transition);
 }
 
 a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  color: var(--text-accent);
+  text-decoration: none;
+  transition: color var(--transition-speed) ease;
 }
 a:hover {
-  color: #535bf2;
+  text-decoration: underline;
+  opacity: 0.8;
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+img { max-width: 100%; display: block; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-secondary);
+  color: var(--text-headings);
+  margin-bottom: 0.75rem;
+  line-height: 1.2;
+  transition: var(--color-transition);
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+/* Utility Class for Text Shadow (applies to current text color) */
+.text-shadow-soft {
+  /* This shadow works better by not specifying a color, letting it use current text color with opacity */
+  text-shadow: 0px 1px 3px rgba(var(--shadow-color-rgb), var(--shadow-opacity-light));
+}
+.text-shadow-strong {
+   text-shadow: 1px 1px 3px rgba(var(--shadow-color-rgb), var(--shadow-opacity-medium));
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+
+/* Section Padding */
+.page-section { padding: 4rem 0; }
+
+/* Overlay for content sections on dynamic backgrounds */
+.content-section-overlay {
+    position: relative;
+    z-index: 1;
+    background-color: var(--bg-overlay);
+    backdrop-filter: blur(10px); /* Adjust blur as desired */
+    padding: 3rem 2rem;
+    margin: 5vh auto;
+    max-width: 900px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(var(--shadow-color-rgb), var(--shadow-opacity-light));
+    border: 1px solid var(--border-secondary); /* Subtle border */
+    transition: var(--color-transition), box-shadow var(--transition-speed) ease;
+}
+.content-section-overlay h2,
+.content-section-overlay p,
+.content-section-overlay a {
+    color: var(--text-primary); /* Ensure text inside uses primary text color of current theme */
+}
+.content-section-overlay h2 {
+    color: var(--text-headings);
+}
+.content-section-overlay a {
+    color: var(--text-accent);
+}
+
+
+/* Basic Button Style */
+.btn {
+  display: inline-block;
+  background: var(--brand-primary);
+  color: var(--text-on-brand-bg);
+  padding: 0.8rem 1.5rem;
+  border: 1px solid transparent; /* For consistency with outline */
+  border-radius: 5px;
   cursor: pointer;
-  transition: border-color 0.25s;
+  font-family: var(--font-secondary);
+  font-weight: 600;
+  text-align: center;
+  transition: background-color var(--transition-speed) ease,
+              transform var(--transition-speed) ease,
+              border-color var(--transition-speed) ease,
+              color var(--transition-speed) ease;
 }
-button:hover {
-  border-color: #646cff;
+.btn:hover {
+  background: var(--brand-accent);
+  color: var(--text-primary); /* Text color on accent hover */
+  text-decoration: none;
+  transform: translateY(-2px);
+  border-color: var(--brand-accent);
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.btn:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 2px;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.btn-primary { /* Can inherit from .btn or have specific primary styles */
+  /* If same as .btn, no need for this class unless for semantic distinction */
 }
+
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid var(--text-accent);
+  color: var(--text-accent);
+}
+.btn-outline:hover {
+  background-color: var(--text-accent);
+  color: var(--bg-primary); /* Text on accent background - could be dark or light */
+  border-color: var(--text-accent);
+}
+
+/* Ensure your 3D blob text color adapts if it's meant to */
+/* This is harder as it's set in JS. You might need to pass theme to the 3D component
+   or use CSS variables with a fallback if that's possible with R3F Text.
+   For now, the 3D text in Project3DPreview has hardcoded colors.
+   To make it themeable:
+   1. Pass `theme` from `useTheme()` into `Project3DPreview`.
+   2. In `Project3DPreview`, choose text color based on `theme`.
+*/

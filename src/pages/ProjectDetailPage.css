@@ -1,0 +1,99 @@
+/* src/pages/ProjectDetailPage.css */
+.project-detail-page {
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+}
+
+.project-detail-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(var(--dark-text-color-rgb), 0.1);
+}
+
+.project-title-detail {
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  color: var(--primary-color);
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+}
+
+.project-role-detail {
+  font-size: 1.15rem;
+  color: var(--secondary-color);
+  margin-bottom: 1.5rem;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.project-links-detail .btn {
+  margin: 0.5rem;
+  font-weight: 600;
+}
+
+/* Styles for the 2D Project Image */
+.project-detail-image-container {
+  width: 100%;
+  max-width: 750px; /* Or adjust as per your image aspect ratios */
+  margin: 0 auto 3rem auto; /* Centered with bottom margin */
+  border-radius: 12px; /* Nicer rounding */
+  overflow: hidden;
+  box-shadow: 0 12px 35px rgba(var(--dark-text-color-rgb), 0.12); /* Softer, larger shadow */
+  border: 1px solid rgba(var(--dark-text-color-rgb), 0.05); /* Very subtle border */
+}
+
+.project-detail-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* aspect-ratio: 16 / 9; /* Optional: enforce aspect ratio if images vary wildly */
+}
+
+/* Common styling for content sections */
+.project-section-detail {
+  /* Uses .content-section-overlay from index.css for background/blur/padding/margin */
+  margin-bottom: 2.5rem; /* Consistent bottom margin for sections */
+}
+
+.project-section-detail h3 {
+  font-size: 1.6rem; /* Slightly larger section titles */
+  color: var(--primary-color);
+  margin-bottom: 1.25rem; /* More space below heading */
+  padding-bottom: 0.6rem;
+  border-bottom: 2px solid rgba(var(--primary-color-rgb), 0.2); /* Thicker, softer border */
+  display: inline-block;
+  font-weight: 600;
+}
+
+.project-description-text p, /* If using dangerouslySetInnerHTML, this targets the generated p tags implicitly */
+.project-section-detail p {
+  margin-bottom: 1rem;
+  line-height: 1.75; /* More readable line height */
+  color: var(--dark-text-color);
+  font-size: 1rem; /* Ensure consistent paragraph font size */
+}
+/* Ensure paragraphs from dangerouslySetInnerHTML don't have double margin if already in <p> */
+.project-description-text p:last-child {
+    margin-bottom: 0;
+}
+
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.tag {
+  background-color: rgba(var(--accent-color-rgb), 0.2);
+  color: var(--accent-color);
+  padding: 0.45rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* Back to projects button */
+.project-detail-page .btn { /* Specificity for the back button if needed */
+    font-weight: 600;
+}
