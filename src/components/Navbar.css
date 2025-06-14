@@ -6,11 +6,12 @@
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000;
+  z-index: 1000; /* High z-index */
   transition: background-color 0.4s ease, box-shadow 0.4s ease, var(--color-transition);
 }
 
-.navbar.scrolled {
+.navbar.scrolled,
+.navbar.menu-open-navbar-background { /* Navbar gets background when scrolled OR mobile menu is open */
   background-color: var(--bg-secondary);
   box-shadow: 0 2px 10px rgba(var(--shadow-color-rgb), var(--shadow-opacity-light));
 }
@@ -24,26 +25,18 @@
 .navbar-brand {
   color: var(--text-headings);
   text-decoration: none;
-  font-size: 1.8rem;
-  font-weight: bold;
+  font-size: 1.6rem; /* Slightly smaller for better balance with toggle */
+  font-weight: 700; /* Adjusted weight */
   font-family: var(--font-secondary);
   transition: var(--color-transition);
+  z-index: 1001; /* Ensure brand is above mobile menu background when it slides */
 }
 
 /* Initial color for brand and links when navbar is transparent over hero */
-.navbar:not(.scrolled) .navbar-brand,
-.navbar:not(.scrolled) .nav-link {
-    /* Assuming hero might be dark, or text needs to pop. Adjust if your hero is always light. */
-    /* This color might need to be dynamic based on hero's perceived lightness/darkness */
-    color: var(--text-primary); /* Default to primary text color of the theme */
+.navbar:not(.scrolled):not(.menu-open-navbar-background) .navbar-brand,
+.navbar:not(.scrolled):not(.menu-open-navbar-background) .nav-link {
+    color: var(--text-primary); /* Adjust if hero background requires different initial color */
 }
-/* If you have a class on body like .hero-is-dark-themed when hero is dark */
-/*
-body.hero-is-dark-themed .navbar:not(.scrolled) .navbar-brand,
-body.hero-is-dark-themed .navbar:not(.scrolled) .nav-link {
-    color: var(--light-text-color-equivalent-for-dark-theme-text-primary); // e.g., #e9ecef
-}
-*/
 
 
 .navbar-links-and-toggle {
@@ -54,18 +47,19 @@ body.hero-is-dark-themed .navbar:not(.scrolled) .nav-link {
 
 .navbar-links {
   list-style: none;
-  display: flex;
+  display: flex; /* Default for desktop */
   margin: 0;
   padding: 0;
   gap: 25px;
 }
 
 .nav-link {
-  color: var(--text-secondary); /* Default link color when navbar has background */
+  color: var(--text-secondary);
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 0.95rem; /* Slightly smaller nav links */
   font-weight: 500;
   position: relative;
+  padding: 0.5rem 0.25rem; /* Add some padding for easier click/tap */
   transition: var(--color-transition);
 }
 
@@ -77,7 +71,7 @@ body.hero-is-dark-themed .navbar:not(.scrolled) .nav-link {
 .nav-link.active::after {
   content: '';
   position: absolute;
-  bottom: -5px;
+  bottom: 0px; /* Closer to text */
   left: 0;
   width: 100%;
   height: 2px;
@@ -85,51 +79,79 @@ body.hero-is-dark-themed .navbar:not(.scrolled) .nav-link {
   transition: background-color var(--transition-speed) ease;
 }
 
-/* Mobile Menu Styles (Placeholder - expand as needed) */
+/* --- Mobile Menu Styles --- */
 .mobile-menu-toggle {
-  display: none; /* Hidden by default */
+  display: none; /* Hidden by default, shown in media query */
   background: none;
   border: none;
-  color: var(--text-primary);
-  font-size: 1.8rem; /* Adjust size */
+  color: var(--text-primary); /* Will inherit from current theme */
+  font-size: 1.5rem; /* Size of the icon container */
   cursor: pointer;
   padding: 0.5rem;
+  z-index: 1005; /* Above everything else in navbar */
   transition: var(--color-transition);
 }
+/* Fill for SVG icons in toggle button */
+.mobile-menu-toggle svg {
+    fill: var(--text-primary);
+    transition: var(--color-transition);
+}
+.navbar:not(.scrolled):not(.menu-open-navbar-background) .mobile-menu-toggle svg {
+    fill: var(--text-primary); /* Adjust if hero background requires different initial icon color */
+}
 
-@media (max-width: 768px) { /* Or your chosen breakpoint */
+
+@media (max-width: 768px) { /* Or your preferred breakpoint, e.g., 800px */
   .mobile-menu-toggle {
-    display: block;
-    z-index: 1001; /* Above navbar content if it overlays */
-  }
-  .navbar-links-and-toggle {
-    /* Basic example: hide, then show when 'open' class is added by JS */
-    display: none;
-    flex-direction: column;
+    display: flex; /* Use flex to center icon if needed */
     align-items: center;
+    justify-content: center;
+  }
+
+  .navbar-links-and-toggle {
+    display: none; /* Hidden by default on mobile */
+    flex-direction: column;
+    align-items: center; /* Center items in the dropdown */
     position: absolute;
-    top: 100%; /* Position below the navbar header part */
+    top: 100%; /* Position it right below the navbar header part */
     left: 0;
     width: 100%;
-    background-color: var(--bg-secondary);
-    padding: 1rem;
-    box-shadow: 0 4px 6px rgba(var(--shadow-color-rgb), var(--shadow-opacity-light));
+    background-color: var(--bg-secondary); /* Mobile menu background */
+    padding: 1.5rem 1rem; /* Padding for the dropdown */
+    box-shadow: 0 8px 15px rgba(var(--shadow-color-rgb), var(--shadow-opacity-medium));
     border-top: 1px solid var(--border-primary);
+    max-height: calc(100vh - 60px); /* Max height to prevent overly long menu, 60px is example navbar height */
+    overflow-y: auto; /* Allow scrolling if many items */
+    transition: var(--color-transition); /* For background color change */
   }
+
   .navbar-links-and-toggle.open {
-    display: flex;
+    display: flex; /* Show when .open class is added */
   }
+
   .navbar-links {
-    flex-direction: column;
+    flex-direction: column; /* Stack links vertically */
     width: 100%;
-    gap: 1rem;
-    align-items: center;
+    gap: 0.5rem; /* Spacing between vertical links */
+    align-items: center; /* Center link text */
+    margin-bottom: 1.5rem; /* Space before theme toggle */
   }
+
   .nav-link {
     margin-left: 0;
-    padding: 0.5rem 0;
+    padding: 0.75rem 0; /* Larger tap area for vertical links */
+    font-size: 1.1rem; /* Slightly larger font for mobile menu links */
+    width: 100%; /* Make links take full width for easier tapping */
+    text-align: center;
   }
+  .nav-link.active::after { /* Mobile active indicator could be different */
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30%; /* Shorter underline for centered text */
+  }
+
   .navbar-links-and-toggle .theme-toggle-button {
-    margin-top: 1rem;
+    margin-top: 1rem; /* Space for the theme toggle button in the mobile menu */
   }
 }
