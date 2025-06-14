@@ -21,10 +21,10 @@ function ContactPage() {
     e.preventDefault();
     setFormStatus({ submitting: true, success: null, message: 'Sending...' });
 
-    const API_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
+    const contactApiUrl = '/api/contact';
 
     try {
-      const response = await fetch(`${API_URL}/api/contact`, {
+      const response = await fetch(contactApiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
