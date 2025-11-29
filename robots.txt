@@ -1,0 +1,12 @@
+# robots.txt for portfolio
+# Allow all crawlers but disallow API endpoints and other non-content paths
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /api/testimonials/
+
+# If you later host the site at a domain, the sitemap location should be the absolute URL
+Sitemap: /sitemap.xml
+
+# End of file

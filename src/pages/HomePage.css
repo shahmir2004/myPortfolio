@@ -168,12 +168,12 @@
     min-height: 80vh;
   }
   .hero-content-container {
-    max-width: 100%; /* Full width within section's padding */
-    padding-left: 0; /* Rely on .hero-section's padding */
+    max-width: 100%; 
+    padding-left: 0; 
     padding-right: 0;
   }
   .hero-title {
-    font-size: clamp(2.4rem, 9vw, 3.2rem); /* Adjusted mobile title size */
+    font-size: clamp(2.4rem, 9vw, 3.2rem); 
   }
   .hero-subtitle {
     font-size: clamp(1.1rem, 4.5vw, 1.5rem);
