@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import SEO from '../components/SEO';
 import ProjectCard from '../components/ProjectCard';
 import { projects } from '../projectData'; // Your project data
 import './ProjectsPage.css'; // You will create and style this
@@ -24,8 +25,26 @@ const headerVariants = {
 
 
 function ProjectsPage() {
+  const projectsSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Shahmir Ahmed's Projects",
+    "description": "Portfolio of software development and programming projects by Shahmir Ahmed",
+    "creator": {
+      "@type": "Person",
+      "name": "Shahmir Ahmed"
+    }
+  };
+
   return (
     <div className="projects-page page-section">
+      <SEO 
+        title="Projects | Shahmir Ahmed - Software Developer Portfolio"
+        description="Explore Shahmir Ahmed's software development projects including Staff-Flow AI, Secure MNIST ZTA, FYP Management Database, and more. Full-Stack, AI/ML, and Cybersecurity projects."
+        keywords="Shahmir Ahmed Projects, Portfolio, Software Developer Projects, Programmer Work, AI Projects, Full-Stack Projects, React Projects, Python Projects"
+        url="/projects"
+        schemaMarkup={projectsSchema}
+      />
       <div className="container">
         <motion.div variants={headerVariants} initial="hidden" animate="visible">
           <h2 className="text-center page-title">My Portfolio Projects</h2>

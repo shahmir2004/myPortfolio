@@ -2,6 +2,7 @@
 import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import SEO from '../components/SEO';
 import { projects } from '../projectData';
 import './ProjectDetailPage.css';
 
@@ -23,6 +24,24 @@ function ProjectDetailPage() {
     return <Navigate to="/projects" replace />;
   }
 
+  const projectSchema = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": project.title,
+    "description": project.shortDescription,
+    "author": {
+      "@type": "Person",
+      "name": "Shahmir Ahmed"
+    },
+    "creator": {
+      "@type": "Person",
+      "name": "Shahmir Ahmed"
+    },
+    "keywords": project.tags.join(", "),
+    "url": project.liveUrl || `https://shahmirahmad.vercel.app/projects/${projectId}`,
+    "image": project.imageUrl
+  };
+
   return (
     <motion.div
       className="project-detail-page page-section"
@@ -31,6 +50,14 @@ function ProjectDetailPage() {
       // Stagger children within the page itself, main transition by App.jsx
       variants={{ visible: { transition: { staggerChildren: 0.07, delayChildren: 0.1 } } }}
     >
+      <SEO 
+        title={`${project.title} | Shahmir Ahmed - Software Developer`}
+        description={`${project.shortDescription} - A project by Shahmir Ahmed, Software Developer and Programmer. ${project.description.substring(0, 100)}...`}
+        keywords={`Shahmir Ahmed, ${project.title}, ${project.tags.join(", ")}, Software Developer Project, Programmer Portfolio`}
+        url={`/projects/${projectId}`}
+        image={project.imageUrl}
+        schemaMarkup={projectSchema}
+      />
       <div className="container">
         <motion.div variants={pageContentVariants} className="project-detail-header">
           <h1 className="project-title-detail text-shadow-soft">{project.title}</h1>

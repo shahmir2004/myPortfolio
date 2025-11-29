@@ -1,6 +1,7 @@
 // src/pages/ContactPage.jsx
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import SEO from '../components/SEO';
 import './ContactPage.css';
 // Import shared variants
 import {
@@ -45,6 +46,19 @@ function ContactPage() {
 
   const contactEmail = import.meta.env.VITE_CONTACT_EMAIL || 'shahmir.portfolio@example.com';
 
+  const contactSchema = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact Shahmir Ahmed",
+    "description": "Get in touch with Shahmir Ahmed - Software Developer and Programmer for project inquiries, collaborations, or questions",
+    "mainEntity": {
+      "@type": "Person",
+      "name": "Shahmir Ahmed",
+      "email": contactEmail,
+      "url": "https://shahmirahmad.vercel.app/"
+    }
+  };
+
   return (
     <motion.div
       className="contact-page content-section-overlay"
@@ -53,6 +67,13 @@ function ContactPage() {
       animate="visible" // Or whileInView
       viewport={{ once: true, amount: 0.1 }} // Only if using whileInView
     >
+      <SEO 
+        title="Contact Shahmir Ahmed | Software Developer & Programmer"
+        description="Get in touch with Shahmir Ahmed - Software Developer and Programmer. Available for freelance projects, collaborations, and inquiries. Let's build something amazing together!"
+        keywords="Contact Shahmir Ahmed, Hire Software Developer, Hire Programmer, Freelance Developer, Contact Programmer"
+        url="/contact"
+        schemaMarkup={contactSchema}
+      />
       <div className="container">
         <motion.h2 variants={itemFadeInUpVariants} className="section-title text-shadow-soft text-center">
             Get In Touch

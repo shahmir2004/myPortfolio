@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
+import { HelmetProvider } from 'react-helmet-async';
 import Lenis from '@studio-freight/lenis';
 
 // Components
@@ -103,15 +104,17 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-        <Navbar />
-        <main className="container" style={{ flex: 1, paddingTop: '2rem', paddingBottom: '2rem' }}> {/* Adjust padding as needed */}
-          <AnimatedRoutes />
-        </main>
-        <Footer />
-      </div>
-    </Router>
+    <HelmetProvider>
+      <Router>
+        <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+          <Navbar />
+          <main className="container" style={{ flex: 1, paddingTop: '2rem', paddingBottom: '2rem' }}> {/* Adjust padding as needed */}
+            <AnimatedRoutes />
+          </main>
+          <Footer />
+        </div>
+      </Router>
+    </HelmetProvider>
   );
 }
 

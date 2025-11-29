@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import SEO from '../components/SEO';
 import './AboutPage.css';
 
 const sectionVariants = {
@@ -18,6 +19,15 @@ function AboutPage() {
     tools: ["Git & GitHub", "VS Code", "Figma (Basic)", "Docker (Basic)"],
   };
 
+  const aboutSchema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Shahmir Ahmed",
+    "jobTitle": "Software Developer",
+    "description": "Computer Science student and Software Developer specializing in Full-Stack Development, AI/ML, and Cybersecurity",
+    "knowsAbout": skills.languages.concat(skills.frameworks)
+  };
+
   return (
     <motion.div
       className="about-page page-section"
@@ -25,6 +35,13 @@ function AboutPage() {
       initial="hidden"
       animate="visible"
     >
+      <SEO 
+        title="About Shahmir Ahmed | Software Developer & Programmer"
+        description="Learn about Shahmir Ahmed, a Computer Science student and Software Developer passionate about Full-Stack Development, AI/ML, and building elegant web solutions. Explore skills in React, Python, Node.js."
+        keywords="Shahmir Ahmed, About, Software Developer, Programmer, Computer Science Student, Skills, React Developer, Python Developer"
+        url="/about"
+        schemaMarkup={aboutSchema}
+      />
       <div className="container">
         <motion.h2 variants={itemVariants} className="text-center page-title">About Me</motion.h2>
         <div className="about-content">

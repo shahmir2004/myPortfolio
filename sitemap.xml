@@ -2,56 +2,56 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Sitemap generated: 2025-11-29 -->
   <url>
-    <loc>/</loc>
+    <loc>https://shahmirahmad.vercel.app/</loc>
     <lastmod>2025-11-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.00</priority>
   </url>
   <url>
-    <loc>/about</loc>
+    <loc>https://shahmirahmad.vercel.app/about</loc>
     <lastmod>2025-11-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>/projects</loc>
+    <loc>https://shahmirahmad.vercel.app/projects</loc>
     <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>/contact</loc>
+    <loc>https://shahmirahmad.vercel.app/contact</loc>
     <lastmod>2025-11-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.64</priority>
   </url>
   <!-- Project detail pages (based on numeric project IDs) -->
   <url>
-    <loc>/projects/1</loc>
+    <loc>https://shahmirahmad.vercel.app/projects/1</loc>
     <lastmod>2025-11-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.64</priority>
   </url>
   <url>
-    <loc>/projects/2</loc>
+    <loc>https://shahmirahmad.vercel.app/projects/2</loc>
     <lastmod>2025-11-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.64</priority>
   </url>
   <url>
-    <loc>/projects/3</loc>
+    <loc>https://shahmirahmad.vercel.app/projects/3</loc>
     <lastmod>2025-11-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.64</priority>
   </url>
   <url>
-    <loc>/projects/4</loc>
+    <loc>https://shahmirahmad.vercel.app/projects/4</loc>
     <lastmod>2025-11-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.64</priority>
   </url>
   <url>
-    <loc>/projects/5</loc>
+    <loc>https://shahmirahmad.vercel.app/projects/5</loc>
     <lastmod>2025-11-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.64</priority>

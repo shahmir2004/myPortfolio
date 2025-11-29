@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import SEO from '../components/SEO';
 import ParticleBackground from '../components/ParticleBackground'; // Assuming ParticleBackground is preferred
 // import InteractiveBlobCanvas from '../components/InteractiveBlob'; // Or this if you switched back
 import './HomePage.css';
@@ -56,8 +57,25 @@ function HomePage() {
     { id: 2, title: "Secure MNIST ZTA", path: "/projects" },
   ];
 
+  const homeSchema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Shahmir Ahmed",
+    "jobTitle": "Software Developer",
+    "description": "Creative Software Developer and Programmer specializing in AI/ML, Full-Stack Development, and Cybersecurity",
+    "url": "https://shahmirahmad.vercel.app/",
+    "knowsAbout": ["Software Development", "Programming", "AI/ML", "Full-Stack Development", "React", "Python", "Node.js"]
+  };
+
   return (
     <div className="homepage-wrapper">
+      <SEO 
+        title="Shahmir Ahmed | Software Developer & Programmer | Portfolio"
+        description="Shahmir Ahmed - Creative Software Developer and Programmer. CS Student specializing in AI/ML, Full-Stack Development, Cybersecurity. Explore innovative projects in React, Python, Node.js."
+        keywords="Shahmir Ahmed, Programmer, Software Developer, Full-Stack Developer, Web Developer, AI Engineer, React, Python, Node.js, Portfolio"
+        url="/"
+        schemaMarkup={homeSchema}
+      />
       {/* <InteractiveBlobCanvas /> OR <ParticleBackground /> */}
       <ParticleBackground /> {/* Defaulting to ParticleBackground */}
 

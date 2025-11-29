@@ -6,7 +6,7 @@ Allow: /
 Disallow: /api/
 Disallow: /api/testimonials/
 
-# If you later host the site at a domain, the sitemap location should be the absolute URL
-Sitemap: /sitemap.xml
+# Sitemap location (use absolute URL for better compatibility)
+Sitemap: https://shahmirahmad.vercel.app/sitemap.xml
 
 # End of file
