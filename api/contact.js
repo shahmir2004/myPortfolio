@@ -55,6 +55,16 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { name, email, message } = req.body;
 
+    const requiredEnv = ['EMAIL_USER_SENDER', 'EMAIL_PASS_SENDER', 'EMAIL_RECEIVER'];
+    const missingEnv = requiredEnv.filter((key) => !process.env[key] || !process.env[key].trim());
+    if (missingEnv.length > 0) {
+      console.error(`Missing required email env vars: ${missingEnv.join(', ')}`);
+      return res.status(500).json({
+        success: false,
+        message: 'Email service is not configured. Please try again later.',
+      });
+    }
+
     // Basic validation
     if (!name || !name.trim() || !email || !email.trim() || !message || !message.trim()) {
       return res.status(400).json({ success: false, message: 'All fields are required.' });
