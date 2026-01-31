@@ -85,14 +85,14 @@ function App() {
 
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 0.8,
+      duration: 0.5,
       easing: (t) => 1 - Math.pow(1 - t, 4),
       smoothWheel: true,
-      smoothTouch: false,
-      touchMultiplier: 1.5,
+      smoothTouch: true,
+      touchMultiplier: 1.2,
       infinite: false,
-      wheelMultiplier: 1,
-      lerp: 0.1,
+      wheelMultiplier: 1.2,
+      lerp: 0.18,
     });
 
     function raf(time) {
