@@ -1,5 +1,5 @@
 // portfolio-project/api/contact.js
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 import cors from 'cors';
 
 // Helper to initialize and run CORS middleware
@@ -20,26 +20,9 @@ function runMiddleware(req, res, fn) {
   });
 }
 
-// Nodemailer Transporter Setup
-// Environment variables will be set in Vercel Project Settings
-const transporter = nodemailer.createTransport({
-  service: 'gmail', // Or your email provider
-  auth: {
-    user: process.env.EMAIL_USER_SENDER, // Your sending email (e.g., your Gmail)
-    pass: process.env.EMAIL_PASS_SENDER, // Your Gmail App Password
-  },
-});
-
-// Verify transporter (optional, good for local dev with `vercel dev`)
-if (process.env.NODE_ENV !== 'production') { // Only verify in non-production to avoid issues on cold starts
-    transporter.verify((error, success) => {
-        if (error) {
-            console.error('Error with email transporter config:', error.message);
-        } else {
-            console.log('Email transporter ready.');
-        }
-    });
-}
+// Resend Setup
+// Get your API key from https://resend.com/api-keys
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 
 export default async function handler(req, res) {
@@ -55,15 +38,15 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { name, email, message } = req.body;
 
-    const requiredEnv = ['EMAIL_USER_SENDER', 'EMAIL_PASS_SENDER', 'EMAIL_RECEIVER'];
-    const missingEnv = requiredEnv.filter((key) => !process.env[key] || !process.env[key].trim());
-    if (missingEnv.length > 0) {
-      console.error(`Missing required email env vars: ${missingEnv.join(', ')}`);
+    if (!process.env.RESEND_API_KEY) {
+      console.error('Missing RESEND_API_KEY environment variable');
       return res.status(500).json({
         success: false,
         message: 'Email service is not configured. Please try again later.',
       });
     }
+
+    const EMAIL_RECEIVER = process.env.EMAIL_RECEIVER || 'saima.shahmir@gmail.com';
 
     // Basic validation
     if (!name || !name.trim() || !email || !email.trim() || !message || !message.trim()) {
@@ -74,56 +57,58 @@ export default async function handler(req, res) {
       return res.status(400).json({ success: false, message: 'Please enter a valid email address.' });
     }
 
-    const mailToOwnerOptions = {
-      from: `"Shahmir - Portfolio <${process.env.EMAIL_USER_SENDER}>"`,
-      to: process.env.EMAIL_RECEIVER, // Email where you receive contact messages
-      replyTo: email, // Client's email for easy reply
-      subject: `New Portfolio Contact from ${name} (${email})`,
-      html: `
-        <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email (Reply-To):</strong> ${email}</p>
-        <hr>
-        <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, '<br>')}</p>
-      `,
-    };
-
-    const mailToUserOptions = {
-      from: `"Shahmir Ahmed - Portfolio <${process.env.EMAIL_USER_SENDER}>"`,
-      to: email,
-      subject: "Thank you for contacting Shahmir Ahmed!",
-      html: `
-        <p>Hi ${name},</p>
-        <p>Thank you for reaching out through my portfolio! I've received your message and will get back to you as soon as possible (typically within 24-48 hours).</p>
-        <p>For your records, here's a copy of the message you sent:</p>
-        <blockquote style="border-left: 2px solid #ccc; padding-left: 1em; margin-left: 0.5em; font-style: italic;">
+    try {
+      // Send notification email to owner
+      const { error: ownerError } = await resend.emails.send({
+        from: 'Portfolio Contact <onboarding@resend.dev>',
+        to: EMAIL_RECEIVER,
+        replyTo: email,
+        subject: `New Portfolio Contact from ${name} (${email})`,
+        html: `
+          <h2>New Contact Form Submission</h2>
           <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Email (Reply-To):</strong> ${email}</p>
+          <hr>
           <p><strong>Message:</strong></p>
           <p>${message.replace(/\n/g, '<br>')}</p>
-        </blockquote>
-        <p>Best regards,</p>
-        <p>Shahmir Ahmed</p>
-        ${process.env.VITE_SITE_URL ? `<p><a href="${process.env.VITE_SITE_URL}">${process.env.VITE_SITE_URL.replace(/^https?:\/\//, '')}</a></p>` : ''}
-      `,
-    };
+        `,
+      });
 
-    try {
-      await transporter.sendMail(mailToOwnerOptions);
-      console.log(`Notification email sent to ${process.env.EMAIL_RECEIVER} from ${email}`);
+      if (ownerError) {
+        console.error('Error sending notification email:', ownerError);
+        return res.status(500).json({ success: false, message: 'Failed to send message. Please try again later.' });
+      }
 
+      console.log(`Notification email sent to ${EMAIL_RECEIVER} from ${email}`);
+
+      // Send confirmation email to user (optional, don't fail if this fails)
       try {
-        await transporter.sendMail(mailToUserOptions);
+        await resend.emails.send({
+          from: 'Shahmir Ahmed <onboarding@resend.dev>',
+          to: email,
+          subject: 'Thank you for contacting Shahmir Ahmed!',
+          html: `
+            <p>Hi ${name},</p>
+            <p>Thank you for reaching out through my portfolio! I've received your message and will get back to you as soon as possible (typically within 24-48 hours).</p>
+            <p>For your records, here's a copy of the message you sent:</p>
+            <blockquote style="border-left: 2px solid #ccc; padding-left: 1em; margin-left: 0.5em; font-style: italic;">
+              <p><strong>Name:</strong> ${name}</p>
+              <p><strong>Email:</strong> ${email}</p>
+              <p><strong>Message:</strong></p>
+              <p>${message.replace(/\n/g, '<br>')}</p>
+            </blockquote>
+            <p>Best regards,</p>
+            <p>Shahmir Ahmed</p>
+          `,
+        });
         console.log(`Confirmation email sent to user: ${email}`);
       } catch (userEmailError) {
         console.error(`Failed to send confirmation email to ${email}:`, userEmailError.message);
-        // Log this but don't fail the primary success response
       }
 
       return res.status(200).json({ success: true, message: 'Message sent successfully! You should receive a confirmation email shortly.' });
     } catch (error) {
-      console.error('Error sending main notification email:', error.message);
+      console.error('Error sending email:', error);
       return res.status(500).json({ success: false, message: 'Failed to send message. Please try again later.' });
     }
   } else {

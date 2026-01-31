@@ -16,7 +16,7 @@
     "@studio-freight/lenis": "^1.0.27",
     "cors": "^2.8.5",
     "framer-motion": "^10.16.4",
-    "nodemailer": "^7.0.3",
+    "resend": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet-async": "^2.0.5",
